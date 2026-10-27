@@ -1,0 +1,16 @@
+{
+  "name": "confluencr-transaction",
+  "version": "1.0.0",
+  "description": "Transaction Ledger API",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "node --watch src/app.js"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "fastify": "^4.28.1",
+    "pg": "^8.12.0"
+  }
+}
