@@ -5,7 +5,7 @@ const accountRoutes = require('./routes/accounts')
 const transactionRoutes = require('./routes/transactions')
 
 function buildApp() {
-  const app = fastify({ logger: true, ajv: { customOptions: { multipleOfPrecision: 2, removeAdditional: false } } })
+  const app = fastify({ logger: true, ajv: { customOptions: { multipleOfPrecision: 8, removeAdditional: false } } })
 
   app.setErrorHandler((err, request, reply) => {
     if (err.validation) {

@@ -10,7 +10,7 @@ const createBody = {
   type: 'object',
   properties: {
     type: { type: 'string', enum: ['credit', 'debit'] },
-    amount: { type: 'number', exclusiveMinimum: 0, maximum: 9999999999999, multipleOf: 0.01 },
+    amount: { type: 'number', minimum: 0.01, maximum: 9999999999999, multipleOf: 0.01 },
     description: { type: 'string' },
     reference_id: { type: 'string', minLength: 1 }
   },
@@ -36,6 +36,13 @@ async function applyTransaction(client, accountId, body) {
   const account = await client.query('SELECT balance FROM accounts WHERE id = $1 FOR UPDATE', [accountId])
   if (account.rows.length === 0) {
     throw httpError(404, 'Account not found')
+  }
+  const existing = await client.query(
+    'SELECT id FROM transactions WHERE account_id = $1 AND reference_id = $2',
+    [accountId, body.reference_id]
+  )
+  if (existing.rows.length > 0) {
+    throw httpError(409, 'Duplicate reference_id')
   }
   if (body.type === 'debit' && account.rows[0].balance < body.amount) {
     throw httpError(422, 'Insufficient balance')
