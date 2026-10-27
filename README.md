@@ -102,6 +102,12 @@ Newest first. `limit` defaults to 20 (max 100), `offset` defaults to 0. 404 if t
 - **Unique `(account_id, reference_id)`:** gives idempotency per account; the same `reference_id` can be used on different accounts.
 - **Balance stored on the account:** it is updated in the same DB transaction as the transaction insert, so the two always agree and reads are cheap. A `CHECK (balance >= 0)` is a last line of defence.
 
+## Known limitations
+
+- Fastify's default type coercion is on, so `"amount": "50"` is accepted and treated as 50.
+- `amount` is capped at 9999999999999, but repeated credits can still push the balance past `NUMERIC(15,2)`, which returns a 500.
+- `name` has no maximum length.
+
 ## Bruno collection
 
 1. Install [Bruno](https://www.usebruno.com/).
