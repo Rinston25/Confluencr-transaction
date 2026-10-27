@@ -1,0 +1,20 @@
+meta {
+  name: Duplicate Reference
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseUrl}}/accounts/{{accountId}}/transactions
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "type": "credit",
+    "amount": 100,
+    "description": "Same reference again",
+    "reference_id": "ref-001"
+  }
+}

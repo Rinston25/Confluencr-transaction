@@ -1,0 +1,20 @@
+meta {
+  name: Credit Transaction
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/accounts/{{accountId}}/transactions
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "type": "credit",
+    "amount": 100,
+    "description": "Initial deposit",
+    "reference_id": "ref-001"
+  }
+}

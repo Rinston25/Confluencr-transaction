@@ -1,0 +1,20 @@
+meta {
+  name: Debit Transaction
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/accounts/{{accountId}}/transactions
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "type": "debit",
+    "amount": 40.5,
+    "description": "Payment",
+    "reference_id": "ref-002"
+  }
+}

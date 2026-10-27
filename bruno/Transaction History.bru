@@ -1,0 +1,16 @@
+meta {
+  name: Transaction History
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{baseUrl}}/accounts/{{accountId}}/transactions?limit=20&offset=0
+  body: none
+  auth: none
+}
+
+params:query {
+  limit: 20
+  offset: 0
+}
