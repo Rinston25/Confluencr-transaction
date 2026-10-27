@@ -1,0 +1,20 @@
+meta {
+  name: Insufficient Balance
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{baseUrl}}/accounts/{{accountId}}/transactions
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "type": "debit",
+    "amount": 1000000,
+    "description": "More than the balance",
+    "reference_id": "ref-003"
+  }
+}
